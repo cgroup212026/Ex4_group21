@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Profile</title>
+    <link href="../CSS/AddGame.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="../CSS/Login.css" rel="stylesheet" />
+    <script src="../Scripts/ajaxCall.js"></script>
+    <script src="../Scripts/EditProfile.js"></script>
+
+</head>
+
+<body>
+
+    <a href="./index.html" id="back-btn">Back</a>
+
+    <h1>Profile</h1>
+    <h3>Reshape your data</h3>
+
+    <div class="form-card">
+        <form class="form" id="EditProfileForm">
+            <h2 class="form-title">Edit Profile</h2>
+
+
+            <div class="input-wrapper">
+                <input id="UserName" class="input" placeholder="UserName" type="text" required title="letters only, minimal length of 2." pattern="[A-Za-z]{2,}">
+                <span class="required-star">*</span>
+            </div>
+
+
+            <div class="input-wrapper">
+                <input id="UserPass" class="input" placeholder="Password" type="password" required pattern="(?=.*[A-Z])(?=.*[0-9]).{8,}">
+                <span class="required-star">*</span>
+            </div>
+
+            <button class="form-btn" type="submit">Edit</button>
+        </form>
+    </div>
+
+</body>
+</html>

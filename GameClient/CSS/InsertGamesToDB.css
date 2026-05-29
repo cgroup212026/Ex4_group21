@@ -1,0 +1,137 @@
+﻿body {
+    background:
+    /* כתם ורוד עדין למעלה משמאל */
+    radial-gradient(circle at 15% 20%, rgba(255, 0, 127, 0.15) 0%, transparent 40%),
+    /* כתם סגול עדין למטה מימין */
+    radial-gradient(circle at 85% 80%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
+    /* רקע הבסיס הכהה */
+    linear-gradient(135deg, #090a0f 0%, #151125 50%, #0d1b2a 100%);
+    background-attachment: fixed;
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+    /* Center the form on the screen */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Typography --- */
+h1 {
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    /* אפקט צבע מדורג לטקסט */
+    background: linear-gradient(90deg, #ff007f, #7928ca, #00eaef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 20px rgba(255, 0, 127, 0.2);
+}
+
+h3 {
+    text-align: center;
+    color: #a1a1aa;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+/* --- Form Container (Adapted from your .card-style & #toolbar) --- */
+#formUpload {
+    background: rgba(20, 20, 35, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    width: 100%;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+    #formUpload:hover {
+        border-color: #00eaef;
+        box-shadow: 0 15px 35px rgba(0, 234, 239, 0.15), 0 0 20px rgba(255, 0, 127, 0.1);
+        transform: translateY(-5px);
+    }
+
+/* --- Labels & Inputs --- */
+label {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: #e2e8f0;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Adapted from your #toolbar input[type="text"] */
+input[type="file"] {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    width: 100%;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+    input[type="file"]:focus, input[type="file"]:hover {
+        border-color: #00eaef;
+        box-shadow: 0 0 10px rgba(0, 234, 239, 0.3);
+    }
+
+    /* Styled the native "Choose File" button using your #my-games-btn style */
+    input[type="file"]::file-selector-button {
+        background: linear-gradient(135deg, #7928ca, #ff007f);
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 800;
+        font-family: 'Outfit', sans-serif;
+        margin-right: 15px;
+        transition: 0.3s;
+    }
+
+        input[type="file"]::file-selector-button:hover {
+            box-shadow: 0 4px 15px rgba(121, 40, 202, 0.4);
+            transform: scale(1.05);
+        }
+
+/* --- Upload Button (Adapted from your #load-btn) --- */
+#BtnUpload {
+    display: block;
+    width: 100%;
+    margin-top: 15px;
+    padding: 15px;
+    background: linear-gradient(135deg, #00eaef, #007aff);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 234, 239, 0.4);
+    transition: 0.3s;
+}
+
+    #BtnUpload:hover {
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 12px 35px rgba(0, 234, 239, 0.6);
+    }

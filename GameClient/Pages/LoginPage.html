@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Steam Games - Login</title>
+    <link href="../CSS/Login.css" rel="stylesheet" />
+    <script src="../Scripts/ajaxCall.js"></script>
+    <script src="../Scripts/LogIn.js"></script>
+
+</head>
+<body>
+    <div class="header-container">
+        <h1>Steam Games</h1>
+        <h3>Welcome to your library</h3>
+    </div>
+
+    <div class="forms-wrapper">
+        <div class="form-container">
+            <form class="form" id="myLoginForm">
+                <h2 class="form-title">Log in</h2>
+
+                <div class="input-wrapper">
+                    <input class="input" placeholder="Email" type="email" required id="EmailLogin">
+                    <span class="required-star">*</span>
+                </div>
+
+                <div class="input-wrapper">
+                    <input class="input" placeholder="Password" type="password" required title="Have 8 or more characters, at least one number and at least one uppercase letter." id="PasswordLogin">
+                    <span class="required-star">*</span>
+                </div>
+
+                <button class="form-btn" type="submit">Log in</button>
+                <input class="form-btn" type="button" value="Log in as a Guest" id="Guest"/>
+            </form>
+        </div>
+
+        <div class="form-container">
+            <form class="form" id="myRegisterForm">
+                <h2 class="form-title">Register</h2>
+
+
+                <div class="input-wrapper">
+                    <input id="NameReg" class="input" placeholder="Name" type="text" required title="letters only, minimal length of 2."  pattern="[A-Za-z]{2,}">
+                    <span class="required-star">*</span>
+                </div>
+
+                <div class="input-wrapper">
+                    <input id="EmailReg" class="input" placeholder="Email" type="email" required>
+                    <span class="required-star">*</span>
+                </div>
+
+                <div class="input-wrapper">
+                    <input id="PassReg" class="input" placeholder="Password" type="password" required pattern="(?=.*[A-Z])(?=.*[0-9]).{8,}">
+                    <span class="required-star">*</span>
+                </div>
+
+                <div class="custom-checkbox-wrapper">
+                    <input type="checkbox" id="active-user" class="hidden-checkbox" checked>
+                </div>
+
+                <button class="form-btn" type="submit">Register</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
