@@ -1,0 +1,539 @@
+﻿/* --- Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@500;800&family=Inter:wght@400;600&display=swap');
+
+/* --- General --- */
+body {
+    background:
+    /* כתם ורוד עדין למעלה משמאל */
+    radial-gradient(circle at 15% 20%, rgba(255, 0, 127, 0.15) 0%, transparent 40%),
+    /* כתם סגול עדין למטה מימין */
+    radial-gradient(circle at 85% 80%, rgba(121, 40, 202, 0.15) 0%, transparent 40%),
+    /* רקע הבסיס הכהה */
+    linear-gradient(135deg, #090a0f 0%, #151125 50%, #0d1b2a 100%);
+    background-attachment: fixed;
+    /* חשוב מאוד: גורם לכתמים להישאר במקום בזמן הגלילה */
+    color: #e2e8f0;
+    font-family: 'Inter', system-ui, sans-serif;
+    margin: 0;
+    padding: 20px;
+    min-height: 100vh;
+}
+
+/* --- Typography --- */
+h1 {
+    text-align: center;
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 5px;
+    /* אפקט צבע מדורג לטקסט */
+    background: linear-gradient(90deg, #ff007f, #7928ca, #00eaef);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 4px 20px rgba(255, 0, 127, 0.2);
+}
+
+h3 {
+    text-align: center;
+    color: #a1a1aa;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-bottom: 40px;
+}
+
+#my-games-btn,
+#back-btn {
+    background: linear-gradient(135deg, #7928ca, #ff007f);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 800;
+    font-size: 1.1rem;
+    font-family: 'Outfit', sans-serif;
+    box-shadow: 0 4px 15px rgba(121, 40, 202, 0.4);
+    transition: 0.3s;
+    /* הוספתי לו קצת מרחק משאר הכפתורים כדי שיבלוט כמשהו נפרד */
+    margin-right: 15px;
+}
+
+    #my-games-btn:hover,
+    #back-btn:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 25px rgba(255, 0, 127, 0.6);
+    }
+
+/* --- ה-Toolbar עצמו (מוודא שהוא נשאר Sticky למעלה) --- */
+#toolbar {
+    position: sticky;
+    top: 20px;
+    /* נעצר ישר בהתחלה */
+    z-index: 100;
+    background: rgba(20, 20, 35, 0.6);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 15px 25px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+    #toolbar input[type="text"],
+    #toolbar select {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 8px;
+        outline: none;
+        font-family: 'Inter', sans-serif;
+        transition: 0.3s;
+    }
+
+        #toolbar input[type="text"]:focus,
+        #toolbar select:focus {
+            border-color: #00eaef;
+            box-shadow: 0 0 10px rgba(0, 234, 239, 0.3);
+        }
+
+/* --- Common Buttons --- */
+.filter-btn,
+.special-btn,
+.os-btn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 8px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+    .filter-btn:hover,
+    .special-btn:hover,
+    .os-btn:hover {
+        background: #00eaef;
+        color: #090a0f;
+        border-color: #00eaef;
+        box-shadow: 0 0 15px rgba(0, 234, 239, 0.5);
+        transform: translateY(-2px);
+    }
+
+#load-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 15px 50px;
+    background: linear-gradient(135deg, #00eaef, #007aff);
+    color: #ffffff;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.2rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 234, 239, 0.4);
+    transition: 0.3s;
+}
+
+    #load-btn:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 12px 35px rgba(0, 234, 239, 0.6);
+    }
+
+/* --- Cards Grid --- */
+.card-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+/* --- Single Card --- */
+.card-style {
+    background: rgba(20, 20, 35, 0.3);
+    /* שקיפות מוגברת - הורדתי מ-0.5 ל-0.3 */
+    backdrop-filter: blur(12px);
+    /* אפקט זכוכית מעט יותר חזק */
+    -webkit-backdrop-filter: blur(12px);
+    /* תמיכה לספארי */
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    /* מסגרת עדינה שכמעט נעלמת */
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+    .card-style:hover {
+        transform: translateY(-12px);
+        border-color: #00eaef;
+        background: rgba(20, 20, 35, 0.5);
+        /* נהיה מעט יותר אטום במעבר עכבר להדגשה */
+        box-shadow: 0 15px 35px rgba(0, 234, 239, 0.15), 0 0 20px rgba(255, 0, 127, 0.1);
+    }
+
+.game-img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.card-style:hover .game-img {
+    filter: brightness(1.1);
+}
+
+.game-title {
+    margin: 15px;
+    font-size: 1.4rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: 800;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+/* --- Info Rows --- */
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 15px;
+    font-size: 0.95rem;
+}
+
+.label {
+    color: #94a3b8;
+}
+
+.value.price {
+    color: #10b981;
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4);
+}
+
+.value.score {
+    color: #f59e0b;
+    font-weight: bold;
+}
+
+.value {
+    color: #e2e8f0;
+}
+
+/* --- Badges & Tags --- */
+.os-container,
+.tags-container {
+    padding: 12px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.os-badge {
+    background: rgba(0, 234, 239, 0.1);
+    color: #00eaef;
+    border: 1px solid rgba(0, 234, 239, 0.3);
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-weight: bold;
+}
+
+.tag {
+    background: rgba(255, 255, 255, 0.05);
+    color: #cbd5e1;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+    .tag:hover {
+        background: rgba(255, 0, 127, 0.2);
+        color: #fff;
+        transform: scale(1.05);
+    }
+
+/* --- Action Buttons (Inside Cards) --- */
+.add-btn {
+    margin-top: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-bottom: 5px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+    .add-btn:hover {
+        background: linear-gradient(135deg, #34d399, #10b981);
+        box-shadow: 0 5px 15px rgba(16, 185, 129, 0.4);
+        transform: translateY(-2px);
+    }
+
+.remove-btn {
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
+}
+
+    .remove-btn:hover {
+        background: linear-gradient(135deg, #f87171, #ef4444);
+        box-shadow: 0 5px 15px rgba(239, 68, 68, 0.4);
+    }
+
+.steam-btn {
+    margin: 5px 15px 15px 15px;
+    text-align: center;
+    text-decoration: none;
+    color: #64748b;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+    .steam-btn:hover {
+        color: #00eaef;
+        text-decoration: underline;
+        text-shadow: 0 0 8px rgba(0, 234, 239, 0.3);
+    }
+
+/* --- Active States --- */
+.active {
+    background-color: #00eaef !important;
+    color: #090a0f !important;
+    border-color: #00eaef !important;
+    box-shadow: 0 0 15px rgba(0, 234, 239, 0.6);
+}
+
+.btn-hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: #ff007f !important;
+}
+
+#back-btn {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+#sort-select option {
+    background-color: #151125;
+    color: white;
+}
+
+#toolbar {
+    margin-top: 60px;
+}
+
+
+
+/* --- Header --- */
+.header-container {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+/* --- Forms Wrapper --- */
+.forms-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 50px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+/* --- Form Container (Dark Glassmorphism) --- */
+.form-container {
+    width: 350px;
+    background: rgba(20, 20, 35, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 16px;
+    box-sizing: border-box;
+    padding: 40px 30px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+    .form-container:hover {
+        transform: translateY(-5px);
+        border-color: #00eaef;
+    }
+
+.form-title {
+    text-align: center;
+    color: #ffffff;
+    font-family: 'Outfit', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- Inputs --- */
+.input {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    border-radius: 8px;
+    padding: 12px 15px;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s;
+}
+
+    .input::placeholder {
+        color: #94a3b8;
+    }
+
+    .input:focus {
+        border-color: #00eaef;
+        box-shadow: 0 0 10px rgba(0, 234, 239, 0.3);
+    }
+
+/* --- Checkbox --- */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+}
+
+/* --- Buttons --- */
+.form-btn {
+    background: linear-gradient(135deg, #00eaef, #007aff);
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 800;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 234, 239, 0.3);
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+
+    .form-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(0, 234, 239, 0.5);
+    }
+
+/* --- Required Star --- */
+.input-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.required-star {
+    position: absolute;
+    right: 15px; /* מיקום בצד ימין בתוך השדה */
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ff007f; /* ורוד ניאון שמתאים לערכת הנושא */
+    font-weight: 800;
+    font-size: 1.2rem;
+    pointer-events: none; /* מוודא שהכוכבית לא תפריע ללחיצה על השדה */
+}
+
+.input-wrapper .input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* --- Custom Checkbox --- */
+.custom-checkbox-wrapper {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* מסתיר את ה-checkbox המקורי והמיושן של הדפדפן */
+.hidden-checkbox {
+    display: none;
+}
+
+/* מעצב את הלייבל ככפתור לחיץ המכיל את הריבוע החדש */
+.custom-checkbox-label {
+    position: relative;
+    cursor: pointer;
+    padding-left: 32px; /* מפנה מקום לריבוע */
+    color: #e2e8f0;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    display: inline-block;
+    user-select: none;
+}
+
+    /* הריבוע החדש של ה-checkbox */
+    .custom-checkbox-label::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 6px;
+        transition: all 0.3s ease;
+    }
+
+    /* סימון ה-V בתוך הריבוע (מוסתר כברירת מחדל) */
+    .custom-checkbox-label::after {
+        content: '✔';
+        position: absolute;
+        left: 6px;
+        top: 45%;
+        transform: translateY(-50%) scale(0);
+        color: #00eaef; /* תכלת ניאון */
+        font-size: 14px;
+        transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+/* אנימציה וצבע כשה-checkbox מסומן */
+.hidden-checkbox:checked + .custom-checkbox-label::before {
+    border-color: #00eaef;
+    background: rgba(0, 234, 239, 0.1);
+    box-shadow: 0 0 10px rgba(0, 234, 239, 0.3);
+}
+
+/* מקפיץ את ה-V למסך כשהוא מסומן */
+.hidden-checkbox:checked + .custom-checkbox-label::after {
+    transform: translateY(-50%) scale(1);
+}
